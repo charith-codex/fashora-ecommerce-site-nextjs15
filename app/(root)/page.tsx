@@ -1,9 +1,9 @@
-import React from 'react';
-
 const Homepage = () => {
-  return <>
-  <div>Fashora</div>
-  </>
+  return (
+    <>
+      <div>Fashora</div>
+    </>
+  );
 };
 
 export default Homepage;
