@@ -17,7 +17,13 @@ export const metadata: Metadata = {
   title: 'Sign In',
 };
 
-const SignIn = () => {
+const SignInPage = async () => {
+  const session = await auth();
+
+  if (session) {
+    return redirect('/');
+  }
+
   return (
     <div className="w-full max-w-md mx-auto">
       <Card>
@@ -44,4 +50,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInPage;
