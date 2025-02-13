@@ -87,7 +87,7 @@ export const config = {
             data: { name: token.name },
           });
         }
-        
+
         if (trigger === 'signIn' || trigger === 'signUp') {
           const cookiesObject = await cookies();
           const sessionCartId = cookiesObject.get('sessionCartId')?.value;
@@ -112,6 +112,11 @@ export const config = {
           }
         }
       }
+      // Handle session updates (e.g., name change)
+      if (session?.user.name && trigger === 'update') {
+        token.name = session.user.name;
+      }
+
       return token;
     },
 
