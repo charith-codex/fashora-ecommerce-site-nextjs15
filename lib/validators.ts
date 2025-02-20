@@ -17,10 +17,15 @@ export const insertProductsSchema = z.object({
   brand: z.string().min(3, 'brand must be at least 3 characters'),
   description: z.string().min(3, 'description must be at least 3 characters'),
   stock: z.coerce.number(),
-  images: z.array(z.string()).min(1, 'Product must have at least one image'),
-  isFeatured: z.boolean(),
-  banner: z.string().nullable(),
+  // images: z.array(z.string()).min(1, 'Product must have at least one image'),
+  // isFeatured: z.boolean(),
+  // banner: z.string().nullable(),
   price: currency,
+});
+
+// Schema for updating a product
+export const updateProductSchema = insertProductsSchema.extend({
+  id: z.string().min(1, 'Id is required'),
 });
 
 // Schema for signing in a user
@@ -81,7 +86,7 @@ export const shippingAddressSchema = z.object({
 //Payment Schema
 export const paymentMethodSchema = z
   .object({
-    type: z.string().min(1, 'Pyament method is required'),
+    type: z.string().min(1, 'Payment method is required'),
   })
   .refine((data) => PAYMENT_METHODS.includes(data.type), {
     path: ['type'],
