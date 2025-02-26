@@ -30,6 +30,8 @@
     "bcrypt-ts-edge": "^3.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.5.2",
+    "embla-carousel-react": "^8.5.2",
     "lucide-react": "^0.469.0",
     "next": "^15.1.6",
     "next-auth": "^5.0.0-beta.25",
@@ -43,6 +45,7 @@
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^7.5.2",
+    "vaul": "^1.1.2",
     "ws": "^8.18.0",
     "zod": "^3.24.1"
   },
