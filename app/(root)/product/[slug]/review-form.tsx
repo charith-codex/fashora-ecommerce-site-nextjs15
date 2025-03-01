@@ -34,6 +34,10 @@ import { z } from 'zod';
 import { StarIcon } from 'lucide-react';
 import { reviewFormDefaultValues } from '@/lib/constants';
 import { useToast } from '@/hooks/use-toast';
+import {
+  createUpdateReview,
+  getReviewByProductId,
+} from '@/lib/actions/review.actions';
 
 type CustomerReview = z.infer<typeof insertReviewSchema>;
 
@@ -44,7 +48,7 @@ const ReviewForm = ({
 }: {
   userId: string;
   productId: string;
-  onReviewSubmitted?: () => void;
+  onReviewSubmitted: () => void;
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -55,8 +59,41 @@ const ReviewForm = ({
     defaultValues: reviewFormDefaultValues,
   });
 
-  const handleOpenForm = () => {
+  // Form open handler
+  const handleOpenForm = async () => {
+    form.setValue('productId', productId);
+    form.setValue('userId', userId);
+
+    const review = await getReviewByProductId({ productId });
+
+    if (review) {
+      form.setValue('title', review.title);
+      form.setValue('description', review.description);
+      form.setValue('rating', review.rating);
+    }
+
     setOpen(true);
+  };
+
+  // Form submit handler
+  const onSubmit: SubmitHandler<z.infer<typeof insertReviewSchema>> = async (
+    values
+  ) => {
+    const res = await createUpdateReview({ ...values, productId });
+
+    if (!res.success)
+      return toast({
+        variant: 'destructive',
+        description: res.message,
+      });
+
+    setOpen(false);
+
+    onReviewSubmitted();
+
+    toast({
+      description: res.message,
+    });
   };
 
   return (
@@ -66,7 +103,7 @@ const ReviewForm = ({
       </Button>
       <DialogContent className="sm:max-w-[425px]">
         <Form {...form}>
-          <form method="post">
+          <form method="post" onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
               <DialogTitle>Write a review</DialogTitle>
               <DialogDescription>

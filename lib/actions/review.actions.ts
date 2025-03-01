@@ -87,3 +87,38 @@ export async function createUpdateReview(
     };
   }
 }
+
+// Get all reviews for a product
+export async function getReviews({ productId }: { productId: string }) {
+  const data = await prisma.review.findMany({
+    where: {
+      productId: productId,
+    },
+    include: {
+      user: {
+        select: {
+          name: true,
+        },
+      },
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
+
+  return { data };
+}
+
+// Get a review for a product written by the current user
+export const getReviewByProductId = async ({
+  productId,
+}: {
+  productId: string;
+}) => {
+  const session = await auth();
+  if (!session) throw new Error('User is not authenticated');
+
+  return await prisma.review.findFirst({
+    where: { productId, userId: session?.user.id },
+  });
+};
