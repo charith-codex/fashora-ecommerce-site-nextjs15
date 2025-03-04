@@ -39,7 +39,7 @@ import {
   getReviewByProductId,
 } from '@/lib/actions/review.actions';
 
-type CustomerReview = z.infer<typeof insertReviewSchema>;
+// type CustomerReview = z.infer<typeof insertReviewSchema>;
 
 const ReviewForm = ({
   userId,
