@@ -1,4 +1,5 @@
 # Fashora - Full-Stack E-commerce Website
+<img width="1719" height="907" alt="Screenshot (82)" src="https://github.com/user-attachments/assets/bae3110a-00b6-46b2-a3bc-e66af1de8bdc" />
 
 Welcome to Fashora, a full-stack e-commerce platform built with the latest web technologies. This project showcases a modern, feature-rich online store, created as part of an in-depth exploration of the Next.js framework.
 
@@ -77,6 +78,3 @@ To get a local copy up and running, follow these simple steps.
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 📄 License
-
-This project is distributed under the MIT License. See `LICENSE` for more information.
